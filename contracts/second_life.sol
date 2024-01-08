@@ -14,11 +14,15 @@ contract SecondLifeMarketplace {
     mapping(uint256 => string[]) public achats;
     address private owner;
 
+    event VenteCreee(uint256 venteID, address vendeur);
+    event AchatEffectue(address acheteur, uint256 venteID);
+
     constructor(){
         owner = msg.sender;
         roles[owner] = Role.Administrateur;
     }
 
+    // Produit qui va etre acheté
     struct Vente {
         string photoIPFSHash; // Ajout d'une référence IPFS pour la photo de l'article
         string description;
@@ -44,6 +48,7 @@ contract SecondLifeMarketplace {
         ventes[venteID].stock = _stock;
         ventes[venteID].vendeur = msg.sender; // Enregistre l'adresse du vendeur
         prochaineVenteID++;
+        emit VenteCreee(venteID, msg.sender);
         return venteID;
     }
 
@@ -62,6 +67,30 @@ contract SecondLifeMarketplace {
 
         // Effectue le paiement au vendeur
         payable(ventes[_venteID].vendeur).transfer(msg.value);
+
+        emit AchatEffectue(msg.sender, _venteID);
+    }
+
+        // Fonction pour obtenir les détails d'un article acheté par l'acheteur
+    function getDetailsArticleAchete(address _addr, uint256 _venteID) public view returns (string memory, string memory, uint256, uint256) {
+        require(roles[_addr] == Role.Acheteur, "Erreur");
+
+        // Vérifiez que l'article appartient bien à l'acheteur
+        require(articleAppartientAcheteur(_addr, _venteID), "Pas d'article");
+
+        // Récupère les détails de l'article acheté
+        return (ventes[_venteID].photoIPFSHash, ventes[_venteID].description, ventes[_venteID].prix, ventes[_venteID].stock);
+    }
+
+    // Fonction interne pour vérifier si l'article appartient à l'acheteur
+    function articleAppartientAcheteur(address _addr, uint256 _venteID) internal view returns (bool) {
+        Proprietaire memory proprietaire = proprietaires[_addr];
+        for (uint256 i = 0; i < proprietaire.articlesAchetes.length; i++) {
+            if (proprietaire.articlesAchetes[i] == _venteID) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Ajoute un article à la liste des articles achetés par l'acheteur correspondant à l'adresse fournie
