@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Second Life Marketplace</title>
+</head>
+<body>
+  <h1>Second Life Marketplace</h1>
+  <div id="articles">
+    </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3.js/1.5.2/web3.min.js"></script>
+  <script>
+    const web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+    const contract = new web3.eth.contract(JSON.parse("contract.json"));
+
+    function getArticles() {
+      // Récupère la liste des articles
+      const ventes = contract.methods.getVentes().call();
+
+      // Affiche la liste des articles
+      for (const vente of ventes) {
+        const article = {
+          id: vente[0],
+          description: vente[1],
+          prix: vente[2],
+          stock: vente[3],
+          vendeur: vente[4],
+        };
+
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <div class="article">
+            <h2>${article.description}</h2>
+            <h3>Prix : ${article.prix} ETH</h3>
+            <p>En stock : ${article.stock}</p>
+            <button onclick="acheter(${article.id})">Acheter</button>
+          </div>
+        `;
+
+        document.getElementById("articles").appendChild(div);
+      }
+    }
+
+    function acheter(id) {
+      // Vérifie que l'utilisateur a suffisamment de fonds
+      const solde = web3.eth.getBalance(web3.eth.accounts[0]);
+      if (solde < id) {
+        alert("Vous n'avez pas assez de fonds pour acheter cet article.");
+        return;
+      }
+
+      // Effectue le paiement
+      contract.methods.payerVente(id).send({ from: web3.eth.accounts[0] });
+
+      // Ajoute l'article à la liste des achats de l'utilisateur
+      contract.methods.ajouterAchat(web3.eth.accounts[0], id).send();
+
+      // Affiche un message de confirmation
+      alert("Achat effectué avec succès !");
+    }
+
+    // Charge la liste des articles
+    getArticles();
+  </script>
+</body>
+</html>
