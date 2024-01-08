@@ -1,43 +1,42 @@
-// Utilisez une fonction immédiatement invoquée pour encapsuler votre code
+// Vérifie la disponibilité d'Ethereum et initialise Web3
 (async () => {
     try {
-        // Vérifiez si Ethereum est disponible
         if (typeof window.ethereum !== 'undefined') {
-            // Utilisez window.ethereum pour initialiser Web3
+            // Utilise window.ethereum pour initialiser Web3
             const web3 = new Web3(window.ethereum);
             
-            // Obtenez l'adresse du contrat connecté au portefeuille
+            // Obtient l'adresse du contrat connecté au portefeuille
             const contractConnectWalletAddress = '0x791A4c2BA9caE47eDe652b2F525E3Ae82CB2d13e';
 
-            // Assurez-vous que l'ABI correspond à celui de votre contrat
+            // Assure que l'ABI correspond à celui de votre contrat
             const contract = new web3.eth.Contract(ABI, contractConnectWalletAddress);
 
-            // Ajoutez un événement de clic pour déclencher la récupération du rôle
+            // Ajoute un événement de clic pour déclencher la récupération du rôle
             document.getElementById('getRoleBtn').addEventListener('click', async (event) => {
                 event.preventDefault();
 
-                // Demandez à l'utilisateur de se connecter au portefeuille
+                // Demande à l'utilisateur de se connecter au portefeuille
                 const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
                 const account = accounts[0];
                 console.log('Account:', account);
 
-                // Utilisez la fonction d'utilité pour récupérer le rôle
+                // Utilise la fonction utilitaire pour récupérer le rôle
                 await getRoleDetails(contract, account);
             });
 
-            // Ajoutez un événement de clic pour déclencher la définition du rôle
+            // Ajoute un événement de clic pour déclencher la définition du rôle
             document.getElementById('setRoleForm').addEventListener('submit', async (event) => {
                 event.preventDefault();
 
                 const userAddress = document.getElementById('userAddressInput').value;
                 const role = document.getElementById('roleInput').value;
 
-                // Demandez à l'utilisateur de se connecter au portefeuille
+                // Demande à l'utilisateur de se connecter au portefeuille
                 const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
                 const account = accounts[0];
                 console.log('Account:', account);
 
-                // Utilisez la fonction d'utilité pour définir le rôle
+                // Utilise la fonction utilitaire pour définir le rôle
                 await setRoleTransaction(contract, account, userAddress, role);
             });
         } else {
@@ -49,12 +48,13 @@
     }
 })();
 
-// Utilisez une fonction d'utilité pour récupérer le rôle
+// Fonction utilitaire pour récupérer le rôle
 async function getRoleDetails(contract, account) {
     try {
-        // Assurez-vous que votre contrat possède une fonction pour récupérer le rôle
+        // Assure que votre contrat possède une fonction pour récupérer le rôle
         const result = await contract.methods.getRole(account).call();
 
+        // Affiche le rôle de l'utilisateur
         console.log('Rôle de l\'utilisateur:', result);
         alert("Rôle de l'utilisateur récupéré avec succès");
     } catch (error) {
@@ -63,12 +63,13 @@ async function getRoleDetails(contract, account) {
     }
 }
 
-// Utilisez une fonction d'utilité pour définir le rôle
+// Fonction utilitaire pour définir le rôle
 async function setRoleTransaction(contract, account, userAddress, role) {
     try {
-        // Assurez-vous que votre contrat possède une fonction pour définir le rôle
+        // Assure que votre contrat possède une fonction pour définir le rôle
         const result = await contract.methods.setRole(userAddress, role).send({ from: account });
 
+        // Affiche le reçu de la transaction
         console.log('Transaction receipt:', result);
         alert("Rôle défini avec succès");
     } catch (error) {

@@ -1,17 +1,16 @@
+// Vérifie la disponibilité d'Ethereum et initialise Web3
 (async () => {
     try {
-        // Vérifiez si Ethereum est disponible
         if (typeof window.ethereum !== 'undefined') {
-            // Utilisez window.ethereum pour initialiser Web3
             const web3 = new Web3(window.ethereum);
             
-            // Obtenez l'adresse du contrat connecté au portefeuille
+            // Adresse du contrat connecté au portefeuille
             const contractConnectWalletAddress = '0x791A4c2BA9caE47eDe652b2F525E3Ae82CB2d13e';
 
-            // Assurez-vous que l'ABI correspond à celui de votre contrat
+            // Assure que l'ABI correspond à celui de votre contrat
             const contract = new web3.eth.Contract(ABI, contractConnectWalletAddress);
 
-            // Ajoutez un événement de clic pour déclencher l'ajout de vente
+            // Ajoute un événement de clic pour déclencher l'ajout de vente
             document.getElementById('addSaleBtn').addEventListener('click', async (event) => {
                 event.preventDefault();
                 
@@ -22,12 +21,12 @@
                     stock: parseInt(document.getElementById('SaleStock').value),
                 };
 
-                // Demandez à l'utilisateur de se connecter au portefeuille
+                // Demande à l'utilisateur de se connecter au portefeuille
                 const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
                 const account = accounts[0];
-                console.log('Account:', account);
+                console.log('Compte utilisateur:', account);
 
-                // Utilisez une fonction d'utilité pour effectuer la transaction
+                // Utilise une fonction utilitaire pour effectuer la transaction
                 await addSaleTransaction(contract, saleInfo, account);
             });
         } else {
@@ -39,10 +38,10 @@
     }
 })();
 
-// Utilisez une fonction d'utilité pour effectuer la transaction
+// Fonction utilitaire pour effectuer la transaction d'ajout de vente
 async function addSaleTransaction(contract, saleInfo, account) {
     try {
-        // Assurez-vous que votre contrat possède une fonction pour ajouter une vente
+        // Vérifie que le contrat possède une fonction pour ajouter une vente
         const result = await contract.methods.creerVente(
             saleInfo.photoIPFSHash,
             saleInfo.description,
@@ -50,7 +49,8 @@ async function addSaleTransaction(contract, saleInfo, account) {
             saleInfo.stock
         ).send({ from: account });
 
-        console.log('Transaction receipt:', result);
+        // Affiche le reçu de transaction
+        console.log('Reçu de transaction:', result);
         alert("Vente ajoutée avec succès");
     } catch (error) {
         console.error('Une erreur s\'est produite lors de l\'ajout de la vente.', error);
