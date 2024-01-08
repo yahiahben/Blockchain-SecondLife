@@ -1,32 +1,27 @@
-const ABI=[
+[
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
 	{
+		"anonymous": false,
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
+				"indexed": false,
+				"internalType": "address",
+				"name": "acheteur",
+				"type": "address"
 			},
 			{
+				"indexed": false,
 				"internalType": "uint256",
-				"name": "",
+				"name": "venteID",
 				"type": "uint256"
 			}
 		],
-		"name": "achats",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		"name": "AchatEffectue",
+		"type": "event"
 	},
 	{
 		"inputs": [
@@ -101,6 +96,98 @@ const ABI=[
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_venteID",
+				"type": "uint256"
+			}
+		],
+		"name": "payerVente",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			},
+			{
+				"internalType": "enum SecondLifeMarketplace.Role",
+				"name": "_role",
+				"type": "uint8"
+			}
+		],
+		"name": "setRole",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_addr",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_nom",
+				"type": "string"
+			}
+		],
+		"name": "setVendeur",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "venteID",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "vendeur",
+				"type": "address"
+			}
+		],
+		"name": "VenteCreee",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "achats",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "_addr",
 				"type": "address"
@@ -112,6 +199,45 @@ const ABI=[
 				"internalType": "uint256[]",
 				"name": "",
 				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_addr",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_venteID",
+				"type": "uint256"
+			}
+		],
+		"name": "getDetailsArticleAchete",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -197,19 +323,6 @@ const ABI=[
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "_venteID",
-				"type": "uint256"
-			}
-		],
-		"name": "payerVente",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
@@ -224,24 +337,6 @@ const ABI=[
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_addr",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_nom",
-				"type": "string"
-			}
-		],
-		"name": "setVendeur",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{

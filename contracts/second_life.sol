@@ -126,6 +126,11 @@ contract SecondLifeMarketplace {
         return (vendeur.addr, vendeur.nom);
     }
 
+    function setRole(address _user, Role _role) public {
+        require(roles[msg.sender] == Role.Administrateur, "Seul l'administrateur peut definir les roles");
+        roles[_user] = _role;
+    }
+
     //Fonction retournant le rôle d'un utilisateur
     function getRole(address utilisateur) public view returns (Role) {
         return roles[utilisateur];
