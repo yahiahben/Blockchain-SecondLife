@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.0/dist/web3.min.js"></script>
+  <script src="contracts/ABI.js"></script>
+  <title>Second Life Marketplace</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1em 0;
+    }
+
+    nav {
+      background-color: #444;
+      color: white;
+      padding: 1em;
+      box-sizing: border-box;
+      height: 100vh; /* Ajuster la hauteur du menu à la hauteur de la page */
+      position: fixed; /* Fixer le menu pour qu'il reste visible lors du défilement */
+      left: 0; /* Positionner le menu sur la gauche de la page */
+      top: 0; /* Positionner le menu au sommet de la page */
+      display: flex;
+      flex-direction: column; /* Afficher les éléments du menu en colonne */
+      align-items: flex-start; /* Aligner les éléments du menu sur la gauche */
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5em 1em;
+      margin: 0 0.5em;
+      border-radius: 3px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #555;
+    }
+
+    section {
+      padding: 2em;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      /*width: flex;*/
+      flex: 1; /* Utilise tout l'espace restant */
+      margin-left: 200px; /* Ajuste la marge à gauche pour laisser de l'espace à la barre de navigation */
+    }
+
+    .product {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 1em;
+      margin: 1em;
+      width: 300px;
+      box-sizing: border-box;
+    }
+
+    .product img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1em 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Second Life Marketplace</h1>
+  </header>
+
+  <nav>
+    <a href="indexVendeur2.html">Accueil</a>
+    <a href="A">Vêtements</a>
+    <a href="#">Accessoires</a>
+    <a href="#">Skins</a>
+    <a href="#">Animaux</a>
+    <a href="creervente.html">Créer une vente</a>
+    <a href="connexionMetamask.html">Se connecter au Metamask</a>
+  </nav>
+
+  <section>
+    <script src="src/js/afficherArticles.js"></script>
+  </section>
+
+  <footer>
+    <p>&copy; 2023 Second Life Marketplace. Tous droits réservés. (profil vendeur)</p>
+  </footer>
+</body>
+
+</html>
