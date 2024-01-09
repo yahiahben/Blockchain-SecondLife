@@ -3,7 +3,7 @@
     try {
         if (typeof window.ethereum !== 'undefined') {
             const web3 = new Web3(window.ethereum);
-            
+
             // Adresse du contrat connecté au portefeuille
             const contractConnectWalletAddress = '0x791A4c2BA9caE47eDe652b2F525E3Ae82CB2d13e';
 
@@ -11,14 +11,14 @@
             const contract = new web3.eth.Contract(ABI, contractConnectWalletAddress);
 
             // Ajoute un événement de clic pour déclencher l'ajout de vente
-            document.getElementById('addSaleBtn').addEventListener('click', async (event) => {
+            document.getElementById('createSaleForm').addEventListener('submit', async (event) => {
                 event.preventDefault();
-                
+
                 const saleInfo = {
-                    photoIPFSHash: document.getElementById('SalePhotoIPFSHash').value,
-                    description: document.getElementById('SaleDescription').value,
-                    prix: parseInt(document.getElementById('SalePrix').value),
-                    stock: parseInt(document.getElementById('SaleStock').value),
+                    photoIPFSHash: document.getElementById('photo').value,
+                    description: document.getElementById('description').value,
+                    prix: parseInt(document.getElementById('prix').value),
+                    stock: parseInt(document.getElementById('stock').value),
                 };
 
                 // Demande à l'utilisateur de se connecter au portefeuille
