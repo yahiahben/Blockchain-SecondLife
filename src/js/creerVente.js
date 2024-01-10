@@ -5,7 +5,7 @@
             const web3 = new Web3(window.ethereum);
 
             // Adresse du contrat connecté au portefeuille
-            const contractConnectWalletAddress = '0x791A4c2BA9caE47eDe652b2F525E3Ae82CB2d13e';
+            const contractConnectWalletAddress = '0xC0f68c3dD40266656f5198078bE3d0dCc31Af939';
 
             // Assure que l'ABI correspond à celui de votre contrat
             const contract = new web3.eth.Contract(ABI, contractConnectWalletAddress);

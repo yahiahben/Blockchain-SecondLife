@@ -1,5 +1,5 @@
 // Initialise Web3 si Ethereum est disponible
-const contractConnectWalletAddress = '0x791A4c2BA9caE47eDe652b2F525E3Ae82CB2d13e';
+const contractConnectWalletAddress = '0xC0f68c3dD40266656f5198078bE3d0dCc31Af939';
 
 (async () => {
     try {
