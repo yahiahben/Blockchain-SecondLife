@@ -24,125 +24,6 @@ const ABI=[
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_addr",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_venteID",
-				"type": "uint256"
-			}
-		],
-		"name": "ajouterAchat",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_addr",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_nom",
-				"type": "string"
-			}
-		],
-		"name": "creerAcheteurSansAchat",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_photoIPFSHash",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_description",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_prix",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_stock",
-				"type": "uint256"
-			}
-		],
-		"name": "creerVente",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_venteID",
-				"type": "uint256"
-			}
-		],
-		"name": "payerVente",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_user",
-				"type": "address"
-			},
-			{
-				"internalType": "enum SecondLifeMarketplace.Role",
-				"name": "_role",
-				"type": "uint8"
-			}
-		],
-		"name": "setRole",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_addr",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_nom",
-				"type": "string"
-			}
-		],
-		"name": "setVendeur",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -183,6 +64,81 @@ const ABI=[
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_addr",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_venteID",
+				"type": "uint256"
+			}
+		],
+		"name": "ajouterAchat",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_addr",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_nom",
+				"type": "string"
+			}
+		],
+		"name": "creerAcheteurSansAchat",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_titre",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_description",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_prix",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_stock",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_photoId",
+				"type": "uint256"
+			}
+		],
+		"name": "creerVente",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -234,6 +190,24 @@ const ABI=[
 				"name": "",
 				"type": "uint256"
 			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getNombreVentes",
+		"outputs": [
 			{
 				"internalType": "uint256",
 				"name": "",
@@ -315,9 +289,32 @@ const ABI=[
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_venteID",
+				"type": "uint256"
+			}
+		],
+		"name": "payerVente",
+		"outputs": [],
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -337,6 +334,42 @@ const ABI=[
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			},
+			{
+				"internalType": "enum SecondLifeMarketplace.Role",
+				"name": "_role",
+				"type": "uint8"
+			}
+		],
+		"name": "setRole",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_addr",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_nom",
+				"type": "string"
+			}
+		],
+		"name": "setVendeur",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -375,7 +408,7 @@ const ABI=[
 		"outputs": [
 			{
 				"internalType": "string",
-				"name": "photoIPFSHash",
+				"name": "titre",
 				"type": "string"
 			},
 			{
@@ -397,6 +430,11 @@ const ABI=[
 				"internalType": "address",
 				"name": "vendeur",
 				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "photoId",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

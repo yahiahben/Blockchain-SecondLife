@@ -5,7 +5,7 @@
             const web3 = new Web3(window.ethereum);
 
             // Adresse du contrat connecté au portefeuille
-            const contractConnectWalletAddress = '0xC0f68c3dD40266656f5198078bE3d0dCc31Af939';
+            const contractConnectWalletAddress = '0x195f078e082a4efd1ceef8544f3c8659cb8bd113';
 
             // Assure que l'ABI correspond à celui de votre contrat
             const contract = new web3.eth.Contract(ABI, contractConnectWalletAddress);
@@ -15,10 +15,11 @@
                 event.preventDefault();
 
                 const saleInfo = {
-                    photoIPFSHash: document.getElementById('photo').value,
+                    titre: document.getElementById('titre').value,
                     description: document.getElementById('description').value,
                     prix: parseInt(document.getElementById('prix').value),
                     stock: parseInt(document.getElementById('stock').value),
+                    photoId: parseInt(document.getElementById('photoId').value),
                 };
 
                 // Demande à l'utilisateur de se connecter au portefeuille
@@ -43,10 +44,11 @@ async function addSaleTransaction(contract, saleInfo, account) {
     try {
         // Vérifie que le contrat possède une fonction pour ajouter une vente
         const result = await contract.methods.creerVente(
-            saleInfo.photoIPFSHash,
+            saleInfo.titre,
             saleInfo.description,
             saleInfo.prix,
-            saleInfo.stock
+            saleInfo.stock,
+            saleInfo.photoId
         ).send({ from: account });
 
         // Affiche le reçu de transaction

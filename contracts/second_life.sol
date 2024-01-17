@@ -22,13 +22,14 @@ contract SecondLifeMarketplace {
         roles[owner] = Role.Administrateur;
     }
 
-    // Produit qui va etre acheté
+    // Produit qui va être acheté
     struct Vente {
-        string photoIPFSHash; // Ajout d'une référence IPFS pour la photo de l'article
+        string titre;
         string description;
         uint256 stock;
         uint256 prix;
         address vendeur;
+        uint256 photoId; // Identifiant de la photo (ou chemin vers la photo dans votre application)
     }
 
     struct Proprietaire {
@@ -40,21 +41,29 @@ contract SecondLifeMarketplace {
     uint256 private prochaineVenteID;
 
     // Crée une nouvelle vente avec la description et le prix fournis et renvoie l'identifiant unique de la vente
-    function creerVente(string memory _photoIPFSHash, string memory _description, uint256 _prix, uint256 _stock) public returns (uint256) {
+    function creerVente(string memory _titre, string memory _description, uint256 _prix, uint256 _stock, uint256 _photoId) public returns (uint256) {
         uint256 venteID = prochaineVenteID;
-        ventes[venteID].photoIPFSHash = _photoIPFSHash;
+        ventes[venteID].titre = _titre;
         ventes[venteID].description = _description;
         ventes[venteID].prix = _prix;
         ventes[venteID].stock = _stock;
         ventes[venteID].vendeur = msg.sender; // Enregistre l'adresse du vendeur
+        ventes[venteID].photoId = _photoId; // Associe l'identifiant de la photo à la vente
         prochaineVenteID++;
         emit VenteCreee(venteID, msg.sender);
         return venteID;
     }
 
     // Récupère la description de la vente correspondant à l'identifiant unique fourni
-    function getVente(uint256 _venteID) public view returns (string memory, string memory, uint256, uint256) {
-        return (ventes[_venteID].photoIPFSHash, ventes[_venteID].description, ventes[_venteID].prix, ventes[_venteID].stock);
+    function getVente(uint256 _venteID) public view returns (string memory, string memory, uint256, uint256, address, uint256) {
+        return (
+            ventes[_venteID].titre,
+            ventes[_venteID].description,
+            ventes[_venteID].prix,
+            ventes[_venteID].stock,
+            ventes[_venteID].vendeur,
+            ventes[_venteID].photoId
+        );
     }
 
         // Fonction de paiement
@@ -71,15 +80,25 @@ contract SecondLifeMarketplace {
         emit AchatEffectue(msg.sender, _venteID);
     }
 
+    function getNombreVentes() public view returns (uint256) {
+        return prochaineVenteID;
+    }
+
         // Fonction pour obtenir les détails d'un article acheté par l'acheteur
-    function getDetailsArticleAchete(address _addr, uint256 _venteID) public view returns (string memory, string memory, uint256, uint256) {
+    function getDetailsArticleAchete(address _addr, uint256 _venteID) public view returns (string memory, string memory, uint256, uint256, uint256) {
         require(roles[_addr] == Role.Acheteur, "Erreur");
 
         // Vérifiez que l'article appartient bien à l'acheteur
         require(articleAppartientAcheteur(_addr, _venteID), "Pas d'article");
 
         // Récupère les détails de l'article acheté
-        return (ventes[_venteID].photoIPFSHash, ventes[_venteID].description, ventes[_venteID].prix, ventes[_venteID].stock);
+        return (
+            ventes[_venteID].titre,
+            ventes[_venteID].description,
+            ventes[_venteID].prix,
+            ventes[_venteID].stock,
+            ventes[_venteID].photoId
+        );
     }
 
     // Fonction interne pour vérifier si l'article appartient à l'acheteur

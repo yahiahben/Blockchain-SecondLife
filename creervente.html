@@ -2,88 +2,13 @@
 <html lang="fr">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="src\css\style.css" type="text/css" rel="stylesheet" />
+  <link href="src\css\style-création.css" type="text/css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/web3@1.5.0/dist/web3.min.js"></script>
   <script src="contracts/ABI.js"></script>
   <title>Second Life Marketplace</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
-
-    header {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 1em 0;
-    }
-
-    nav {
-      background-color: #444;
-      color: white;
-      padding: 1em;
-      box-sizing: border-box;
-      height: 100vh; /* Ajuster la hauteur du menu à la hauteur de la page */
-      position: fixed; /* Fixer le menu pour qu'il reste visible lors du défilement */
-      left: 0; /* Positionner le menu sur la gauche de la page */
-      top: 0; /* Positionner le menu au sommet de la page */
-      display: flex;
-      flex-direction: column; /* Afficher les éléments du menu en colonne */
-      align-items: flex-start; /* Aligner les éléments du menu sur la gauche */
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 0.5em 1em;
-      margin: 0 0.5em;
-      border-radius: 3px;
-      transition: background-color 0.3s ease;
-    }
-
-    nav a:hover {
-      background-color: #555;
-    }
-
-    section {
-      padding: 2em;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      /*width: flex;*/
-      flex: 1; /* Utilise tout l'espace restant */
-      margin-left: 200px; /* Ajuste la marge à gauche pour laisser de l'espace à la barre de navigation */
-    }
-
-    .product {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 1em;
-      margin: 1em;
-      width: 300px;
-      box-sizing: border-box;
-    }
-
-    .product img {
-      max-width: 100%;
-      height: auto;
-    }
-
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 1em 0;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-  </style>
 </head>
 
 <body>
@@ -93,42 +18,65 @@
 
   <nav>
     <a href="indexVendeur2.html">Accueil</a>
-    <a href="#">Vêtements</a>
-    <a href="#">Accessoires</a>
-    <a href="#">Skins</a>
-    <a href="#">Animaux</a>
     <a href="creervente.html">Créer une vente</a>
     <a href="connexionMetamask.html">Se connecter au Metamask</a>
   </nav>
 
-  <section>
-    <body>
-      <h1>Créer un article</h1><br />
-    
-      <form id="createSaleForm" action="" method="post">
-        <div class="form-group">
-          <label for="photo">Photo</label>
-          <input type="text" class="form-control" id="photo" name="photo" placeholder="Adresse IPFS de la photo">
+  <div class="page-content">
+    <main>
+      <div id="report-cont">
+        <div class="view-report">
+          <section id="rep-specs" class="t-30 r-section">
+            <div class="container cont-lg">
+              <div class="frm">
+                <h1 class="_root_k4hgl_1 _dark_k4hgl_33 _xxl_10vh9_1" style="text-align: center">
+                  Créer un article
+                </h1>
+                <br />
+
+                <form id="createSaleForm" method="post">
+                  <br /><br />
+                  Titre:
+                  <span class="error">*</span>
+                  <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre de l'article"
+                    required />
+                  <br />
+                  Description:
+                  <span class="error">*</span>
+                  <textarea class="form-control" id="description" name="description" required></textarea>
+                  <br />
+                  Prix:
+                  <span class="error">*</span>
+                  <input type="number" class="form-control" id="prix" name="prix" placeholder="Prix en ETH" required />
+                  <br />
+                  Stock:
+                  <span class="error">*</span>
+                  <input type="number" class="form-control" id="stock" name="stock" placeholder="Quantité disponible"
+                    required />
+                  <br />
+                  Identifiant de la photo:
+                  <span class="error">*</span>
+                  <input type="number" class="form-control" id="photoId" name="photoId"
+                    placeholder="Identifiant de la photo" required />
+                  <br /><br />
+                  <button id="btn" type="submit" class="btn btn-primary">
+                    Créer
+                  </button>
+                  <script src="src\js\creerVente.js"></script>
+                </form>
+              </div>
+            </div>
+          </section>
         </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea class="form-control" id="description" name="description" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="prix">Prix</label>
-          <input type="number" class="form-control" id="prix" name="prix" placeholder="Prix en ETH">
-        </div>
-        <div class="form-group">
-          <label for="stock">Stock</label>
-          <input type="number" class="form-control" id="stock" name="stock" placeholder="Quantité disponible">
-        </div>
-        <button type="submit" class="btn btn-primary">Créer</button>
-        <script src="src\js\creerVente.js"></script>
-      </form>
-    </body>
+      </div>
+    </main>
+  </div>
 
   <footer>
-    <p>&copy; 2023 Second Life Marketplace. Tous droits réservés. (profil vendeur)</p>
+    <p>
+      &copy; 2023 Second Life Marketplace. Tous droits réservés. (profil
+      vendeur)
+    </p>
   </footer>
 </body>
 
@@ -136,4 +84,4 @@
 
 <html lang="fr">
 
-
+</html>
